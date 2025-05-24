@@ -2,7 +2,6 @@ import Konva from "konva";
 import type { RectShape } from "./defects";
 import type { RefObject } from "react";
 
-// Типы для аргументов
 type DrawHandlersArgs = {
   mode: "draw" | "select";
   selectedColor: string;
@@ -20,6 +19,7 @@ type DrawHandlersArgs = {
   selectionStart: RefObject<{ x: number; y: number } | null>;
 };
 
+// Обработчик нажатия мыши — отвечает за начало рисования или выбор объекта
 export const handleMouseDown = (
   e: Konva.KonvaEventObject<MouseEvent>,
   args: DrawHandlersArgs
@@ -85,6 +85,7 @@ export const handleMouseDown = (
   }
 };
 
+// Обработчик движения мыши — отвечает за отрисовку прямоугольника, его перемещение или рамочный выбор
 export const handleMouseMove = (
   e: Konva.KonvaEventObject<MouseEvent>,
   args: DrawHandlersArgs
@@ -143,6 +144,7 @@ export const handleMouseMove = (
   }
 };
 
+// Обработчик отпускания кнопки мыши — завершает рисование или выделение объектов
 export const handleMouseUp = (args: DrawHandlersArgs) => {
   const {
     mode,
@@ -185,6 +187,7 @@ export const handleMouseUp = (args: DrawHandlersArgs) => {
   dragOffsets.current = {};
 };
 
+// Обработчик нажатия клавиш — удаление выбранных прямоугольников
 export const handleKeyDown = (
   e: KeyboardEvent,
   selectedIndices: number[],

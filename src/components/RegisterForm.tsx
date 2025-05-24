@@ -9,6 +9,8 @@ type RegisterFormProps = {
 }
 
 const RegisterForm: FC<RegisterFormProps> = ({ fetchUsers, setIsRegistered, users, apiUrl }) => {
+
+  // Новый пользователь
   const [newUser, setNewUser] = useState<Omit<UserType, "id">>({
     fullName: "",
     status: "",
@@ -18,12 +20,15 @@ const RegisterForm: FC<RegisterFormProps> = ({ fetchUsers, setIsRegistered, user
     reports: [],
   });
   
+  // Ошибка при регистрации
   const [registerError, setRegisterError] = useState("");
   
+  // Обработка изменения полей ввода и обновление состояния newUser
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
   
+  // Регистрация нового пользователя
   const toRegister = async () => {
     if (!newUser.fullName || !newUser.status || !newUser.email || !newUser.password) {
       setRegisterError("Пожалуйста, заполните все поля");

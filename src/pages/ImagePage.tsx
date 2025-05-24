@@ -1,6 +1,6 @@
 import { useState, type FC, useEffect } from "react";
 import type { UserType } from "../App";
-import EditorPage from "../components/EditorPage";
+import Editor from "../components/Editor";
 
 type ImagePageProps = {
   logUser: UserType
@@ -11,14 +11,19 @@ type ImagePageProps = {
 
 
 const ImagePage: FC<ImagePageProps> = ({logUser, setLogUser, fetchUsers, apiUrl}) => {
+  // Выбранный файл
   const [file, setFile] = useState<File | null>(null);
   const [inputKey, setInputKey] = useState<number>(Date.now());
+  // Ошибка при загрузке изображения
   const [uploadError, setUploadError] = useState("");
+  // Отправка изображения для анализа
   const [isProcessing, setIsProcessing] = useState(false);
+  // Путь к загруженному изображению на backend
   const [uploadedImagePath, setUploadedImagePath] = useState<string | null>(() => {
     return localStorage.getItem("uploadedImagePath");
   });
 
+  // Если у пользователя нет изображений, сбрасываем путь к изображению
   useEffect(() => {
     if (!logUser.images || logUser.images.length === 0) {
       setUploadedImagePath(null);
@@ -26,6 +31,7 @@ const ImagePage: FC<ImagePageProps> = ({logUser, setLogUser, fetchUsers, apiUrl}
     }
   }, [logUser]);
 
+  // Функция выбора файла
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0];
     if (!selected || selected.type !== "image/png") {
@@ -35,6 +41,7 @@ const ImagePage: FC<ImagePageProps> = ({logUser, setLogUser, fetchUsers, apiUrl}
     }
   };
 
+  // Обновление пути к изображению в состоянии и localStorage
   const handleUploadedImagePath = (path: string | null) => {
     setUploadedImagePath(path);
     if (path) {
@@ -44,6 +51,7 @@ const ImagePage: FC<ImagePageProps> = ({logUser, setLogUser, fetchUsers, apiUrl}
     }
   };
 
+  // Отправка выбранного PNG-файла на сервер для анализа
   const toAnalyse = async () => {
     if (!file) return;
     setIsProcessing(true);
@@ -87,9 +95,10 @@ const ImagePage: FC<ImagePageProps> = ({logUser, setLogUser, fetchUsers, apiUrl}
     }
   };
 
+  // Переход к редактору, если изображение успешно загружено
   if (uploadedImagePath) {
     return (
-      <EditorPage
+      <Editor
         uploadedImagePath={uploadedImagePath}
         logUser={logUser}
         setUploadedImagePath={setUploadedImagePath}

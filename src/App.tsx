@@ -22,6 +22,7 @@ const App = () => {
   const [users, setUsers] = useState<UserType[]>([]);
   // Сохраненный в локальном хранилище пользователь
   const savedUser = localStorage.getItem('logUser'); 
+  // Пользователь по умолчанию (никто не вошел в систему)
   const nullUser = {
     id: 0,
     fullName: "",
@@ -32,11 +33,16 @@ const App = () => {
     reports: [],
   }
 
+  // Данные вошедшего пользователя
   const [logUser, setLogUser] = useState<UserType>(savedUser ? JSON.parse(savedUser) : nullUser);
+  // Проверка на вход
   const [isEntered, setIsEntered] = useState(localStorage.getItem('isEntered') === 'true');
+  // Проверка на регистрацию
   const [isRegistered, setIsRegistered] = useState(true);
+  // URL для backend
   const apiUrl = import.meta.env.VITE_API_URL
 
+  // Функция загрузки пользователей с backend
   const fetchUsers = useCallback (async () => {
     try {
       const response = await fetch(`${apiUrl}/users/`);

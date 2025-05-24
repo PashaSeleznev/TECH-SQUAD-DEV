@@ -9,7 +9,7 @@ export type RectShape = {
   className: string;
 };
 
-
+// Загрузка дефектов с backend
 export const fetchDefects = async (apiUrl: string) => {
   try {
     const response = await fetch(`${apiUrl}/defects`);
@@ -30,6 +30,7 @@ export const fetchDefects = async (apiUrl: string) => {
   };
 };
 
+// Отправка нового изображения и разметки на backend при генерации отчёта
 export const replaceImage = async (file: File, userId: number, filename: string, rects: RectShape[], apiUrl: string) => {
   try {
     const formData = new FormData();

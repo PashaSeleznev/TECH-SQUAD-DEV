@@ -2,7 +2,11 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
+
+  // Получаем текущий путь из маршрутизатора
   const location = useLocation();
+
+  // Показ списка уведомлений
   const [showNotifications, setShowNotifications] = useState(false);
 
   return (

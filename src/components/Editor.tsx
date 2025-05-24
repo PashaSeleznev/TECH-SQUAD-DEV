@@ -21,27 +21,42 @@ type EditorProps = {
   apiUrl: string
 };
 
-const EditorPage: FC<EditorProps> = ({ uploadedImagePath, logUser, setUploadedImagePath, handleUploadedImagePath, setLogUser, apiUrl }) => {
+const Editor: FC<EditorProps> = ({ uploadedImagePath, logUser, setUploadedImagePath, handleUploadedImagePath, setLogUser, apiUrl }) => {
+
+  // Цвет для рисования прямоугольников
   const [selectedColor, setSelectedColor] = useState(colorArray[0]);
+  
+  // Загрузка изображения
   const [image] = useImage(uploadedImagePath, "anonymous");
   const [imageSize, setImageSize] = useState({ width: 1000, height: 1000 });
 
+  // Все прямоугольники
   const [rects, setRects] = useState<RectShape[]>([]);
+  // Режим рисования или выделения
   const [mode, setMode] = useState<"draw" | "select">("draw");
+  // Текущий прямоугольник
   const [currentRect, setCurrentRect] = useState<RectShape | null>(null);
+  // Выделенные прямоугольники
   const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
 
+  // Начальная точка начала перетаскивания прямоугольника (в режиме select)
   const dragStart = useRef<{ x: number; y: number } | null>(null);
-  const dragOffsets = useRef<{ [index: number]: { x: number; y: number } }>({});
 
+  // Смещения прямоугольников от точки нажатия мыши при их перетаскивании
+  // Хранятся для всех выделенных прямоугольников по их индексам
+  const dragOffsets = useRef<{ [index: number]: { x: number; y: number } }>({});
+  // Начальная точка области выделения (при зажатии мыши в режиме select)
   const selectionStart = useRef<{ x: number; y: number } | null>(null);
+  // Объект, представляющий прямоугольник области выделения
   const [selectionRect, setSelectionRect] = useState<RectShape | null>(null);
 
+  // Ссылка на stage
   const stageRef = useRef<Konva.Stage>(null);
 
+  // Флаг процесса генерации отчета
   const [inGenerate, setInGenerate] = useState(false); 
 
-  // Загрузка дефектов при монтировании
+  // Загрузка дефектов с backend
   useEffect(() => {
     const loadDefects = async () => {
       const defectsFromServer = await fetchDefects(apiUrl);
@@ -50,12 +65,14 @@ const EditorPage: FC<EditorProps> = ({ uploadedImagePath, logUser, setUploadedIm
     loadDefects();
   }, [apiUrl]);
 
+  // Установка размера изображения после его загрузки
   useEffect(() => {
     if (image) {
       setImageSize({ width: image.width, height: image.height });
     }
   }, [image]);
 
+  // Обработка нажатий клавиш (удаление)
   useEffect(() => {
     const handle = (e: KeyboardEvent) =>
     onKeyDownHandler(e, selectedIndices, setRects, setSelectedIndices);
@@ -63,6 +80,7 @@ const EditorPage: FC<EditorProps> = ({ uploadedImagePath, logUser, setUploadedIm
     return () => window.removeEventListener("keydown", handle);
   }, [selectedIndices]);
 
+  // Обработчики мыши, вынесенные в отдельный модуль
   const handleMouseDown = (e: Konva.KonvaEventObject<MouseEvent>) =>
     onMouseDownHandler(e, {
       mode, selectedColor, colorArray, currentRect, setCurrentRect,
@@ -84,6 +102,7 @@ const EditorPage: FC<EditorProps> = ({ uploadedImagePath, logUser, setUploadedIm
       selectionStart, setSelectionRect, selectionRect, selectedIndices
     });
 
+  // Генерация отчета и отправка изображения + разметки на backend
   const toGenerate = async () => {
     if (!stageRef.current) return;
 
@@ -248,4 +267,4 @@ const EditorPage: FC<EditorProps> = ({ uploadedImagePath, logUser, setUploadedIm
   );
 };
 
-export default EditorPage;
+export default Editor;

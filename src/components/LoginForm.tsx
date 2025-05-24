@@ -12,9 +12,11 @@ type LoginFormProps = {
 }
 
 const LoginForm: FC<LoginFormProps> = ({ users, logUser, setLogUser, nullUser, setIsEntered, setIsRegistered }) => {
+
+  // Ошибка входа в аккаунт
   const [loginError, setLoginError] = useState("");
   
-
+  // Проверка логина и пароля, установка состояния при успешном входе
   const toEnter = () => {
     const foundUser = users.find(user => 
       user.email === logUser.email && user.password === logUser.password
@@ -31,6 +33,7 @@ const LoginForm: FC<LoginFormProps> = ({ users, logUser, setLogUser, nullUser, s
     };
   };
 
+  // Обработка изменения полей ввода и обновление состояния logUser
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLogUser({ ...logUser, [e.target.name]: e.target.value });
   };

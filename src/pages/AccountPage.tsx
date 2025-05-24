@@ -12,8 +12,11 @@ type AccountPageProps = {
 }
 
 const AccountPage: FC<AccountPageProps> = ({logUser, setLogUser, setIsEntered, nullUser, fetchUsers, apiUrl}) => {
+
+  // Маршрутизатор для перехода при входе на страницу загрузки изображения
   const navigate = useNavigate();
 
+  // Выход из аккаунта и очистка данных о пользователе из localStorage
   const handleLogOut = () => {
     setIsEntered(false);
     setLogUser(nullUser);
@@ -24,6 +27,7 @@ const AccountPage: FC<AccountPageProps> = ({logUser, setLogUser, setIsEntered, n
     navigate('/');
   };
 
+  // Удаление пользователя и очистка данных о пользователе из localStorage
   const handleDelete = async () => {
     const confirmed = window.confirm("Вы уверены, что хотите удалить аккаунт? Это действие необратимо.");
     if (!confirmed) return;

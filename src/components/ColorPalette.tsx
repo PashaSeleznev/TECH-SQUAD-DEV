@@ -5,6 +5,8 @@ type ColorPaletteProps = {
   setSelectedColor: (color: string) => void;
 };
 
+// Сопоставление номеров классов дефектов с определёнными цветами
+// Используется для визуального различия размеченных прямоугольников
 export const colorArray: Record<number, string> = {
   0: "#2EC3C2",
   1: "#34C759",
@@ -21,11 +23,12 @@ export const colorArray: Record<number, string> = {
   12: "#A6A6A6"
 };
 
-
-
 export const ColorPalette = ({ selectedColor, setSelectedColor }: ColorPaletteProps) => {
+
+  // Показ палитры цветов
   const [isOpen, setIsOpen] = useState(false);
 
+  // Обработчик клика по цвету: устанавливает выбранный цвет для рисования и закрывает палитру
   const handleColorClick = (color: string) => {
     setSelectedColor(color);
     setIsOpen(false);

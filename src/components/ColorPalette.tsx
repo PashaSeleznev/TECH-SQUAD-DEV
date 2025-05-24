@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { colorArray } from "./ColorArray";
+import { classNames, colorArray } from "./ColorArray";
 
 type ColorPaletteProps = {
   selectedColor: string;
@@ -43,7 +43,7 @@ export const ColorPalette = ({ selectedColor, setSelectedColor }: ColorPalettePr
                 }}
               >
               <span className="tooltip">
-                Класс {key}
+                {classNames[Number(key)]}
               </span>
             </div>
           ))}

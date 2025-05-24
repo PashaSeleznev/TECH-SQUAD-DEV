@@ -1,4 +1,4 @@
-import { colorArray } from "../components/ColorPalette";
+import { colorArray } from "../components/ColorArray";
 
 export type RectShape = {
   x: number;

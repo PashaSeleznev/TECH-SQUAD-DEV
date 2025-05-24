@@ -2,7 +2,8 @@ import { Stage, Layer, Image as KonvaImage, Rect } from "react-konva";
 import useImage from "use-image";
 import { useState, useRef, useEffect, type FC } from "react";
 import type Konva from "konva";
-import { ColorPalette, colorArray } from "./ColorPalette";
+import { ColorPalette } from "./ColorPalette";
+import { colorArray } from "./ColorArray";
 import { fetchDefects, replaceImage, type RectShape } from "../actions/defects";
 import type { UserType } from "../App";
 import {

@@ -135,7 +135,7 @@ const EditorPage: FC<EditorProps> = ({ uploadedImagePath, logUser, setUploadedIm
           </div>
 
           <img className="process-img" 
-            src="public/images/loading.png"
+            src="/images/loading.png"
           />
         </div>
       </div>
@@ -241,7 +241,7 @@ const EditorPage: FC<EditorProps> = ({ uploadedImagePath, logUser, setUploadedIm
         </div>
 
         <img className="generate-btn-img" 
-          src="public/images/page.png" 
+          src="/images/page.png" 
         />      
         </div>
       </div>        

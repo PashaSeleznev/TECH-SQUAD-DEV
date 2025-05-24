@@ -108,7 +108,7 @@ const ImagePage: FC<ImagePageProps> = ({logUser, setLogUser, fetchUsers, apiUrl}
 
       <div className="upload-area">
         <img className="upload-area-img" 
-          src="public/images/upload-img.png"
+          src="/images/upload-img.png"
         />
 
         {!file && !isProcessing && (
@@ -146,13 +146,13 @@ const ImagePage: FC<ImagePageProps> = ({logUser, setLogUser, fetchUsers, apiUrl}
 
               <div className="upload-img-success">
                 <img className="uploaded-img-icon" 
-                  src="public/images/done.png"
+                  src="/images/done.png"
                 />
                 <div className="uploaded-img-text">
                   Загрузка завершена
                 </div>
                 <img className="uploaded-img-delete" 
-                  src="public/images/delete.png"
+                  src="/images/delete.png"
                   onClick={() => setFile(null)}
                 />
               </div>
@@ -177,7 +177,7 @@ const ImagePage: FC<ImagePageProps> = ({logUser, setLogUser, fetchUsers, apiUrl}
             </div>
 
             <img className="process-img" 
-              src="public/images/loading.png"
+              src="/images/loading.png"
             />
           </div>
         )}

@@ -110,6 +110,7 @@ const App = () => {
                 setIsEntered={setIsEntered}
                 nullUser={nullUser}
                 fetchUsers={fetchUsers}
+                apiUrl={apiUrl}
               />
             }
           />

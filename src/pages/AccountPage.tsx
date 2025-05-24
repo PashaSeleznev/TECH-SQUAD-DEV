@@ -7,10 +7,11 @@ type AccountPageProps = {
   setLogUser: (user: UserType) => void,
   setIsEntered: (bool: boolean) => void,
   nullUser: UserType,
-  fetchUsers: () => void
+  fetchUsers: () => void,
+  apiUrl: string
 }
 
-const AccountPage: FC<AccountPageProps> = ({logUser, setLogUser, setIsEntered, nullUser, fetchUsers}) => {
+const AccountPage: FC<AccountPageProps> = ({logUser, setLogUser, setIsEntered, nullUser, fetchUsers, apiUrl}) => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -28,7 +29,7 @@ const AccountPage: FC<AccountPageProps> = ({logUser, setLogUser, setIsEntered, n
     if (!confirmed) return;
 
     try {
-      const response = await fetch(`/users/${logUser.id}`, {
+      const response = await fetch(`${apiUrl}/users/${logUser.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +60,7 @@ const AccountPage: FC<AccountPageProps> = ({logUser, setLogUser, setIsEntered, n
 
         <div className="profile">
           <img className="profile-img" 
-            src="public/images/big-avatar.png"
+            src="/images/big-avatar.png"
           />
 
           <div className="profile-info">

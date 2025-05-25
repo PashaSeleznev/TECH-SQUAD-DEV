@@ -46,7 +46,7 @@ const Header = () => {
 
       <div className="header-icons">
         <img className="header-icons-notification" 
-          src="/images/notifications.png"
+          src="public/images/notifications.png"
           onClick={() => setShowNotifications(!showNotifications)} 
         />
 
@@ -59,7 +59,7 @@ const Header = () => {
         )}
 
         <img className="header-icons-profile" 
-          src="/images/avatar.png" 
+          src="public/images/avatar.png" 
         />
       </div>
     </div>

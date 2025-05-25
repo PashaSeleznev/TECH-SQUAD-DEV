@@ -46,7 +46,7 @@ const LoginForm: FC<LoginFormProps> = ({ users, logUser, setLogUser, nullUser, s
           RADEX
         </div>
         <img className="gazprom-logo" 
-          src="/images/gazprom-logo.png" 
+          src="public/images/gazprom-logo.png" 
         />
       </div>
 

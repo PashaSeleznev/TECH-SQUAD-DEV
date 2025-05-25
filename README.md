@@ -54,11 +54,7 @@ cd <repository-name>
 npm install
 ```
 
-<<<<<<< HEAD
 3. Запустите проект в режиме разработки (http://localhost:5173)
-=======
-3. Запустите проект в режиме разработки (http://localhost:8000)
->>>>>>> adc7e74ae5f123f0fd0ebe67d40873fa96fb794f
 ```bash
 npm run dev
 ```

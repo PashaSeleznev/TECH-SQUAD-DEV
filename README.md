@@ -90,4 +90,4 @@ npm run build
 
 ## Backend
 
-Расположен в другом репозитории: [https://github.com/PashaSeleznev/TECH-SQUAD-DEV](https://github.com/RipYashok/Radex-backend)
+Расположен в другом репозитории: https://github.com/RipYashok/Radex-backend
